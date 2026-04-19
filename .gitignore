@@ -1,0 +1,44 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+*.egg
+.venv/
+venv/
+
+# SQLite (local dev database)
+*.db
+
+# Environment
+.env
+backend/.env
+
+# Node
+node_modules/
+frontend/node_modules/
+frontend/.next/
+frontend/out/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Uploads (user content)
+uploads/logos/*
+!uploads/logos/.gitkeep
+!uploads/.gitkeep
+
+# Kiro specs (optional - keep for reference)
+# .kiro/
+
+# Coverage
+.coverage
+htmlcov/
