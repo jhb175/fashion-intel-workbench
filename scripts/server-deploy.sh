@@ -48,6 +48,9 @@ REDIS_URL=redis://redis:6379/0
 JWT_SECRET_KEY=${JWT_SECRET}
 JWT_ALGORITHM=HS256
 JWT_ACCESS_TOKEN_EXPIRE_MINUTES=60
+DEFAULT_ADMIN_USERNAME=jdyyds
+DEFAULT_ADMIN_PASSWORD=f15015699065
+DEFAULT_ADMIN_DISPLAY_NAME=jdyyds
 ENCRYPTION_KEY=${FERNET_KEY}
 CORS_ORIGINS=https://${DOMAIN},http://${DOMAIN}
 NEXT_PUBLIC_API_URL=/api/v1
@@ -266,7 +269,7 @@ echo -e "${GREEN}║       Deploy Complete! 🎉                    ║${NC}"
 echo -e "${GREEN}╚══════════════════════════════════════════════╝${NC}"
 echo ""
 echo -e "  Site:   https://${DOMAIN}"
-echo -e "  Login:  admin / admin123"
+echo -e "  Login:  jdyyds / f15015699065"
 echo ""
 echo -e "  ${YELLOW}Logs:${NC}  docker compose -f docker-compose.server.yml logs -f"
 echo -e "  ${YELLOW}Stop:${NC}  docker compose -f docker-compose.server.yml down"

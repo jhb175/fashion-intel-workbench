@@ -43,11 +43,27 @@ async def _seed_default_data():
 
     async with async_session_factory() as session:
         # Admin user
-        existing = (await session.execute(select(User).where(User.username == "admin"))).scalar_one_or_none()
+        existing = (
+            await session.execute(
+                select(User).where(User.username == settings.DEFAULT_ADMIN_USERNAME)
+            )
+        ).scalar_one_or_none()
         if not existing:
-            pw = bcrypt.hashpw("admin123".encode(), bcrypt.gensalt()).decode()
-            session.add(User(username="admin", password_hash=pw, display_name="管理员"))
-            logger.info("Created default admin user (admin / admin123)")
+            pw = bcrypt.hashpw(
+                settings.DEFAULT_ADMIN_PASSWORD.encode(),
+                bcrypt.gensalt(),
+            ).decode()
+            session.add(
+                User(
+                    username=settings.DEFAULT_ADMIN_USERNAME,
+                    password_hash=pw,
+                    display_name=settings.DEFAULT_ADMIN_DISPLAY_NAME,
+                )
+            )
+            logger.info(
+                "Created default admin user (%s)",
+                settings.DEFAULT_ADMIN_USERNAME,
+            )
 
         # Monitor groups
         groups = [

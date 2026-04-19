@@ -23,6 +23,7 @@ sys.path.insert(0, BACKEND_DIR)
 import bcrypt
 from sqlalchemy import select
 
+from app.config import settings
 from app.database import async_session_factory
 from app.models.user import User
 
@@ -47,28 +48,31 @@ async def create_default_admin() -> None:
     print("[init_db] Checking for default admin user …")
 
     async with async_session_factory() as session:
-        stmt = select(User).where(User.username == "admin")
+        stmt = select(User).where(User.username == settings.DEFAULT_ADMIN_USERNAME)
         existing = (await session.execute(stmt)).scalar_one_or_none()
 
         if existing is not None:
             print("[init_db] Admin user already exists — skipping.")
             return
 
-        password = "admin123"  # default password for development
+        password = settings.DEFAULT_ADMIN_PASSWORD
         password_hash = bcrypt.hashpw(
             password.encode("utf-8"),
             bcrypt.gensalt(),
         ).decode("utf-8")
 
         admin = User(
-            username="admin",
+            username=settings.DEFAULT_ADMIN_USERNAME,
             password_hash=password_hash,
-            display_name="管理员",
+            display_name=settings.DEFAULT_ADMIN_DISPLAY_NAME,
             is_active=True,
         )
         session.add(admin)
         await session.commit()
-        print(f"[init_db] Default admin user created (username=admin).")
+        print(
+            f"[init_db] Default admin user created "
+            f"(username={settings.DEFAULT_ADMIN_USERNAME})."
+        )
 
 
 async def main() -> None:

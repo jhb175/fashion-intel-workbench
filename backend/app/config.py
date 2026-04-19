@@ -17,6 +17,11 @@ class Settings(BaseSettings):
     JWT_ALGORITHM: str = "HS256"
     JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
 
+    # Default login user
+    DEFAULT_ADMIN_USERNAME: str = "admin"
+    DEFAULT_ADMIN_PASSWORD: str = "admin123"
+    DEFAULT_ADMIN_DISPLAY_NAME: str = "管理员"
+
     # Encryption (Fernet key for API key storage)
     ENCRYPTION_KEY: str = "change-me-in-production"
 
